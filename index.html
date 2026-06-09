@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="抗柠系统计算器：用于量化痛苦、阻滞、愉悦与意义体验的静态网页工具。"
+    />
+    <title>抗柠系统计算器</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="score-panel" aria-labelledby="app-title">
+        <div class="title-block">
+          <p class="eyebrow">Kang-Ning System</p>
+          <h1 id="app-title">抗柠系统计算器</h1>
+          <p class="subtitle">用负向“抗值”和正向“柠值”量化一次体验，并得到净抗柠指标。</p>
+        </div>
+
+        <div class="gauge-wrap" aria-label="抗柠仪表盘">
+          <canvas id="gauge" width="720" height="360" aria-hidden="true"></canvas>
+          <p class="sr-only" id="gaugeDescription">仪表盘从左侧负值抗态过渡到右侧正值柠态，中心为中性或混合状态。</p>
+          <div class="score-readout" aria-live="polite" aria-describedby="gaugeDescription">
+            <span id="scoreLabel" class="state-label">中性</span>
+            <strong id="knScore">0.00</strong>
+            <span id="scoreHint">填写量表后自动计算</span>
+          </div>
+        </div>
+
+        <div class="summary-grid">
+          <div>
+            <span>抗值 K-</span>
+            <strong id="kScore">0.00</strong>
+          </div>
+          <div>
+            <span>柠值 N+</span>
+            <strong id="nScore">0.00</strong>
+          </div>
+          <div>
+            <span>置信度 C</span>
+            <strong id="confidenceScore">50%</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="input-panel" aria-label="抗柠指标输入区">
+        <div class="panel-heading">
+          <h2>体验记录</h2>
+          <button id="resetBtn" type="button">重置</button>
+        </div>
+
+        <label class="event-field" for="eventName">
+          <span>事件名称</span>
+          <input id="eventName" type="text" value="一次未命名体验" />
+        </label>
+
+        <div class="columns">
+          <section class="measure-card negative" aria-labelledby="negative-title">
+            <h3 id="negative-title">抗：痛苦与阻滞</h3>
+            <div id="negativeInputs"></div>
+          </section>
+
+          <section class="measure-card positive" aria-labelledby="positive-title">
+            <h3 id="positive-title">柠：愉悦与意义</h3>
+            <div id="positiveInputs"></div>
+          </section>
+        </div>
+
+        <section class="measure-card modifiers" aria-labelledby="modifier-title">
+          <h3 id="modifier-title">调节项</h3>
+          <div id="modifierInputs" class="modifier-grid"></div>
+        </section>
+
+        <details class="advanced">
+          <summary>高级参数：固定常数取中间值</summary>
+          <div id="constantInputs" class="constant-grid"></div>
+        </details>
+      </section>
+
+      <section class="output-panel" aria-label="计算结果">
+        <div>
+          <h2>指标解释</h2>
+          <p id="interpretation">当前抗柠值接近 0，表示中性、麻木或抗柠成分相互抵消。</p>
+        </div>
+
+        <div class="formula-box">
+          <h3>计算公式</h3>
+          <p>K- = Iₖ × (1 + aDₖ) × (1 + bB + cR) × (1 - dG)</p>
+          <p>N+ = Iₙ × (1 + eDₙ) × (1 + fM + gS) × (1 + hG)</p>
+          <p>KN = N+ - K-</p>
+        </div>
+
+        <div class="actions">
+          <button id="copyBtn" type="button">复制结果</button>
+          <button id="downloadBtn" type="button">下载记录</button>
+          <button id="saveBtn" type="button">保存到历史</button>
+          <button id="csvBtn" type="button">导出 CSV</button>
+        </div>
+
+        <textarea id="resultText" readonly aria-label="抗柠计算结果"></textarea>
+
+        <div class="history-panel">
+          <div class="history-head">
+            <h3>本地历史记录</h3>
+            <button id="clearHistoryBtn" type="button">清空历史</button>
+          </div>
+          <ol id="historyList"></ol>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
